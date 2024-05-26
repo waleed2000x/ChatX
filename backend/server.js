@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import router from "./routes/authRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import ConnectMongo from "./db/connection.js";
+import UserRouter from "./routes/userRoutes.js";
 
 const app = express();
 dotenv.config({ path: "config.env" });
@@ -14,6 +15,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use("/api/auth", router);
 app.use("/api/message", messageRouter);
+app.use("/api/users", UserRouter);
 
 const Port = process.env.PORT || 3000;
 
