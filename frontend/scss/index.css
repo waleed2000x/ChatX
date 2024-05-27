@@ -3,16 +3,66 @@
   padding: 0px;
 }
 
+.D {
+  background-color: black;
+  color: white;
+}
+
+.L {
+  background-color: rgb(250, 255, 255);
+  color: black;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.theme-toggle img {
+  width: 30px;
+  height: 30px;
+}
+
 .app {
   display: flex;
   width: 100%;
   min-height: 100vh;
 }
-.app .login-parent {
+.app .signup-parent {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  background-color: black;
+}
+.app .signup-parent h1 {
+  font-size: 35px;
+  font-weight: 800;
+}
+.app .signup-parent form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+  height: 80%;
+}
+.app .login-parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+.app .login-parent h1 {
+  font-size: 35px;
+  font-weight: 800;
+}
+.app .login-parent form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+  height: 50%;
 }/*# sourceMappingURL=index.css.map */

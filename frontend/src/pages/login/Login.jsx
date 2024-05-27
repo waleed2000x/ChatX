@@ -15,12 +15,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "../../components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { useThemeContext } from "@/context/theme";
 
 const FormSchema = z.object({
   username: z
     .string()
     .min(2, { message: "Username must be at least 2 characters." })
-    .trim() // Ensure no leading/trailing spaces
+    .trim()
     .regex(/^[^ ]*?[^ ]+$/, "Username cannot contain spaces."),
   password: z
     .string()
@@ -29,6 +30,7 @@ const FormSchema = z.object({
 });
 
 export default function Login() {
+  const { theme } = useThemeContext();
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -50,7 +52,7 @@ export default function Login() {
 
   return (
     <div className="login-parent">
-      <p>Login</p>
+      <h1>Login</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -65,13 +67,7 @@ export default function Login() {
                 <FormControl>
                   <Input placeholder="shadcn" {...field} />
                 </FormControl>
-                <FormDescription>
-                  This is your public display name. Must be at least 2
-                  characters and cannot contain spaces.
-                </FormDescription>
-                {form.errors && form.errors.username && (
-                  <FormMessage>{form.errors.username.message}</FormMessage>
-                )}
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -84,13 +80,7 @@ export default function Login() {
                 <FormControl>
                   <Input type="password" placeholder="••••••••" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Must be at least 8 characters long and contain at least one
-                  number.
-                </FormDescription>
-                {form.errors && form.errors.password && (
-                  <FormMessage>{form.errors.password.message}</FormMessage>
-                )}
+                <FormMessage />
               </FormItem>
             )}
           />

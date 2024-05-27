@@ -2,16 +2,63 @@
   margin: 0px;
   padding: 0px;
 }
+.D {
+  background-color: black;
+  color: white;
+}
+.L {
+  background-color: rgb(250, 255, 255);
+  color: black;
+}
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  & img {
+    width: 30px;
+    height: 30px;
+  }
+}
 .app {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  .login-parent {
+  .signup-parent {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     min-height: 100vh;
-    background-color: black;
+    & h1 {
+      font-size: 35px;
+      font-weight: 800;
+    }
+    & form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 30%;
+      height: 80%;
+    }
+  }
+  .login-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    & h1 {
+      font-size: 35px;
+      font-weight: 800;
+    }
+    & form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 20%;
+      height: 50%;
+    }
   }
 }
