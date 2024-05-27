@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { useEffect } from "react";
 import Signup from "./pages/signup/Signup";
+import Sidebar from "./elements/Sidebar";
 
 export default function App() {
   const { theme, themeToggler } = useThemeContext();
@@ -24,7 +25,7 @@ export default function App() {
         </Button>
       </div>
       <div className="app">
-        <Signup />
+        <Sidebar />
       </div>
     </main>
   );
