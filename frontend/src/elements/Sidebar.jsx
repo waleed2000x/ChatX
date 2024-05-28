@@ -6,10 +6,13 @@ import Conversations from "./Conversations";
 import LogoutB from "../assets/icons/logoutB.png";
 import LogoutW from "../assets/icons/logoutW.png";
 import useLogout from "@/hooks/useLogout";
+import useGetConversations from "@/hooks/useGetConversation";
 
 export default function Sidebar() {
   const { loading, logout } = useLogout();
   const { theme } = useThemeContext();
+  const { conversations } = useGetConversations();
+  // console.log(conversations);
   return (
     <div className="sidebar">
       <div className="searchbar">
@@ -19,8 +22,17 @@ export default function Sidebar() {
         </Button>
       </div>
       <div className="conversation-container">
-        <Conversations theme={theme} gender="boy" />
-        <Conversations gender="girl" />
+        {conversations &&
+          conversations.map((conversation) => {
+            return (
+              <Conversations
+                key={conversation._id}
+                name={conversation.fullname}
+                avatar={conversation.profilePic}
+                conversation={conversation}
+              />
+            );
+          })}
       </div>
       <div className="logout">
         {!loading ? (

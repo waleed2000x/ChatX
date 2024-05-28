@@ -62,7 +62,7 @@ export default function Signup() {
   });
   function onSubmit(data) {
     axios
-      .post("http://localhost:2000/api/auth/signup", { ...data })
+      .post("http://localhost:3000/api/auth/signup", { ...data })
       .then((response) => {
         setLoading(true);
         const { id, fullname, username, gender, profilePic } = response.data;

@@ -1,8 +1,10 @@
 import { useAuthContext } from "@/context/authContext";
+import useConversation from "@/zustand/useConversation";
 import { useState } from "react";
 import { toast } from "sonner";
 
 const useLogout = () => {
+  const { setSelectedConversation } = useConversation();
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
 
@@ -18,6 +20,7 @@ const useLogout = () => {
         throw new Error(data.error);
       }
       localStorage.removeItem("chat-user");
+      setSelectedConversation(null);
       setAuthUser(null);
       toast("🟩 Logged Out Successfully!");
     } catch (error) {
