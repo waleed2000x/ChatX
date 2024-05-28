@@ -1,13 +1,13 @@
 import useGetMessages from "@/hooks/useGetMessages";
 import useConversation from "@/zustand/useConversation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function Message({ theme }) {
   const [showTimestamps, setShowTimestamps] = useState({}); // State to track visibility for each message
   const { selectedConversation } = useConversation();
   const { messages, loading } = useGetMessages();
-
+  const messagesEndRef = useRef(null);
   console.log("messages");
   console.log(messages);
   console.log(selectedConversation);
@@ -20,7 +20,15 @@ export default function Message({ theme }) {
       [messageId]: !prevTimestamps[messageId],
     }));
   };
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
+  useEffect(() => {
+    setTimeout(() => {
+      scrollToBottom();
+    }, 500);
+  }, [messages]);
   return (
     <>
       {loading && (
@@ -55,6 +63,7 @@ export default function Message({ theme }) {
             const fromClient = message.senderId === selectedConversation._id;
             return (
               <div
+                ref={messagesEndRef}
                 key={message._id}
                 className={`message ${fromClient ? "sent" : "receive"} ${
                   theme === "L" ? "light" : "dark"

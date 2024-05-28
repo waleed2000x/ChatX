@@ -8,7 +8,7 @@ const generateTokenAndSetCookie = (userId, res) => {
     httpOnly: true, // prevention from XSS attack
     sameSite: "strict", // CSRF protection
     secure: process.env.NODE_ENV === "production",
-    maxAge: 3600000, // in hours it is equal to 24 hours
+    maxAge: 86400000, // in hours it is equal to 24 hours
   });
   return token;
 };

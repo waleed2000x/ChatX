@@ -1,6 +1,7 @@
 import { useAuthContext } from "@/context/authContext";
 import useConversation from "@/zustand/useConversation";
 import { useState } from "react";
+import { redirect } from "react-router-dom";
 import { toast } from "sonner";
 
 const useLogout = () => {
@@ -19,6 +20,7 @@ const useLogout = () => {
       if (data.error) {
         throw new Error(data.error);
       }
+      redirect("/");
       localStorage.removeItem("chat-user");
       setSelectedConversation(null);
       setAuthUser(null);
