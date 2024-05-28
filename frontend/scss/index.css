@@ -218,6 +218,7 @@
   display: none;
 }
 .app .home .messages-container .messages .message {
+  position: relative;
   width: -moz-max-content;
   width: max-content;
   padding: 10px 20px;
@@ -229,10 +230,20 @@
   word-wrap: break-word;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
   /* Styles for the light theme */
   /* Styles for the dark theme */
   /* Sender message styles */
   /* Receiver message styles */
+}
+.app .home .messages-container .messages .message .created-at {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 7px;
+  color: #505050;
+  width: 140px;
 }
 .app .home .messages-container .messages .message.light {
   border: 1px solid #ccc;
@@ -240,27 +251,27 @@
 .app .home .messages-container .messages .message.dark {
   border: 1px solid #444;
 }
-.app .home .messages-container .messages .message.received {
+.app .home .messages-container .messages .message.sent {
   align-self: flex-end;
   border-bottom-right-radius: 0;
 }
-.app .home .messages-container .messages .message.received.light {
+.app .home .messages-container .messages .message.sent.light {
   background-color: #b3a7ff;
   color: #333;
 }
-.app .home .messages-container .messages .message.received.dark {
+.app .home .messages-container .messages .message.sent.dark {
   background-color: rgba(179, 167, 255, 0.6039215686);
   color: #fff;
 }
-.app .home .messages-container .messages .message.sent {
+.app .home .messages-container .messages .message.receive {
   align-self: flex-start;
   border-bottom-left-radius: 0;
 }
-.app .home .messages-container .messages .message.sent.light {
+.app .home .messages-container .messages .message.receive.light {
   background-color: #f1f1f1;
   color: #333;
 }
-.app .home .messages-container .messages .message.sent.dark {
+.app .home .messages-container .messages .message.receive.dark {
   background-color: #2a2a2a;
   color: #fff;
 }

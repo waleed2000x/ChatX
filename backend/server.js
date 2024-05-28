@@ -25,7 +25,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // API routes
 app.use("/api/auth", router);
-app.use("/api/message", messageRouter);
+app.use("/api/messages", messageRouter);
 app.use("/api/users", UserRouter);
 
 // Catch-all route to serve index.html

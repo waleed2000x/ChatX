@@ -6,10 +6,7 @@ import { useEffect } from "react";
 export default function Conversations({ name, avatar, conversation }) {
   const { selectedConversation, setSelectedConversation } = useConversation();
   const isSelected = selectedConversation?._id === conversation._id;
-  console.log(name);
-  useEffect(() => {
-    console.log(selectedConversation);
-  }, [selectedConversation]);
+  useEffect(() => {}, [selectedConversation]);
   return (
     <>
       <div

@@ -12,7 +12,6 @@ export default function Sidebar() {
   const { loading, logout } = useLogout();
   const { theme } = useThemeContext();
   const { conversations } = useGetConversations();
-  // console.log(conversations);
   return (
     <div className="sidebar">
       <div className="searchbar">

@@ -24,7 +24,8 @@ const useSendMessage = () => {
 
       setMessages([...messages, data]);
     } catch (error) {
-      toast(error.message);
+      console.log(error);
+      toast(JSON.stringify(error.message));
     } finally {
       setLoading(false);
     }

@@ -16,7 +16,6 @@ export default function App() {
   const { theme, themeToggler } = useThemeContext();
   const { authUser } = useAuthContext();
   useEffect(() => {
-    console.log(theme);
     toast(`Theme Changed To: ${theme === "L" ? "Light" : "Dark"}`);
   }, [theme]);
   return (

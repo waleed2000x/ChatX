@@ -8,6 +8,7 @@ import * as z from "zod";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import useSendMessage from "@/hooks/useSendMessage";
+import Message from "./Message";
 
 export default function Messages({ role }) {
   const { loading, sendMessage } = useSendMessage();
@@ -38,16 +39,7 @@ export default function Messages({ role }) {
           <div className="messages-header">
             <h3>{selectedConversation.fullname}</h3>
           </div>
-          <div className="messages">
-            <div className={`message sent ${theme === "L" ? "light" : "dark"}`}>
-              <p>Hello how are you?!?!?!?!?!?!</p>
-            </div>
-            <div
-              className={`message received ${theme === "L" ? "light" : "dark"}`}
-            >
-              <p>Hello how are you?!?!?!?!?!?!</p>
-            </div>
-          </div>
+          <Message theme={theme} role={role} />
           <div className="messages-input">
             <form onSubmit={handleSubmit}>
               <Input

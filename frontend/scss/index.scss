@@ -19,11 +19,6 @@
     height: 30px;
   }
 }
-// .divider {
-//   width: 95%;
-//   height: 0.5px;
-//   margin: 5px 5px 10px 5px;
-// }
 .selected-convo {
   background-color: #8977ff !important;
   color: black;
@@ -216,6 +211,7 @@
         }
         /* Base styles for the chat bubble */
         .message {
+          position: relative;
           width: max-content;
           padding: 10px 20px;
           margin: 10px;
@@ -226,7 +222,17 @@
           word-wrap: break-word;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           transition: background-color 0.3s ease, color 0.3s ease;
-
+          cursor: pointer;
+          .created-at {
+            position: absolute;
+            top: 110%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 7px;
+            color: #505050;
+            width: 140px;
+            // bottom: 3px;
+          }
           /* Styles for the light theme */
           &.light {
             border: 1px solid #ccc;
@@ -238,7 +244,7 @@
           }
 
           /* Sender message styles */
-          &.received {
+          &.sent {
             align-self: flex-end;
             border-bottom-right-radius: 0;
 
@@ -254,7 +260,7 @@
           }
 
           /* Receiver message styles */
-          &.sent {
+          &.receive {
             align-self: flex-start;
             border-bottom-left-radius: 0;
 
