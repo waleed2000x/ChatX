@@ -6,15 +6,12 @@ export const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
-    const correctPassword = await user.correctPassword(password, user.password);
-    if (!user || !correctPassword) {
+    if (!user) {
       return res.status(403).json({ message: "Invalid username or password" });
     }
-    if (!user) {
-      return res.status(403).json({ message: "User does not exist" });
-    }
+    const correctPassword = await user.correctPassword(password, user.password);
     if (!correctPassword) {
-      return res.status(403).json({ message: "Invalid Password" });
+      return res.status(403).json({ message: "Invalid username or password" });
     }
     generateTokenAndSetCookie(user._id, res);
     return res
@@ -22,12 +19,14 @@ export const login = async (req, res, next) => {
       .json({ message: "Logged in successfully", username });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error });
+    return res.status(500).json({ error: error.message });
   }
 };
+
 // ? SIGNUP
 export const signup = async (req, res, next) => {
-  const { fullname, username, password, confirmPassword, gender } = req.body;
+  const { _id, fullname, username, password, confirmPassword, gender } =
+    req.body;
   try {
     if (password !== confirmPassword) {
       return res.status(403).json({ message: "Passwords do not match" });
@@ -44,6 +43,7 @@ export const signup = async (req, res, next) => {
     const profilePic = gender === "male" ? boyProfilePic : girlProfilePic;
 
     const newUser = new User({
+      id: _id,
       fullname,
       username,
       password,
@@ -55,7 +55,8 @@ export const signup = async (req, res, next) => {
       await newUser.save();
 
       return res.status(201).json({
-        message: "User created successfully",
+        message: `${fullname} Welcome, Signup successful`,
+        id: newUser._id,
         fullname: newUser.fullname,
         username: newUser.username,
         gender: newUser.gender,

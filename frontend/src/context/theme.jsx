@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
@@ -5,7 +7,7 @@ const ThemeContext = createContext();
 export const useThemeContext = () => useContext(ThemeContext);
 
 export const ThemeContextProvider = ({ children }) => {
-  const [theme, setTheme] = useState(localStorage.getItem("L"));
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "L");
 
   function themeToggler() {
     setTheme((prevTheme) => {
@@ -18,6 +20,7 @@ export const ThemeContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
+
   return (
     <ThemeContext.Provider value={{ theme, themeToggler }}>
       {children}

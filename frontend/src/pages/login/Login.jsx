@@ -16,6 +16,8 @@ import {
 import { Input } from "../../components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { useThemeContext } from "@/context/theme";
+import { Link } from "react-router-dom";
+import useLogin from "@/hooks/useLogin";
 
 const FormSchema = z.object({
   username: z
@@ -30,6 +32,7 @@ const FormSchema = z.object({
 });
 
 export default function Login() {
+  const { loading, login } = useLogin();
   const { theme } = useThemeContext();
   const form = useForm({
     resolver: zodResolver(FormSchema),
@@ -40,6 +43,7 @@ export default function Login() {
   });
 
   function onSubmit(data) {
+    login(data.username, data.password);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -84,7 +88,16 @@ export default function Login() {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Link to="/signup">
+            <FormDescription>Dont have an Account?</FormDescription>
+          </Link>
+          {loading ? (
+            <Button type="submit" disabled>
+              Submitting...
+            </Button>
+          ) : (
+            <Button type="submit">Submit</Button>
+          )}
         </form>
       </Form>
     </div>
