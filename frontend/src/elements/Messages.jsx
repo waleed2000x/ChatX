@@ -7,19 +7,23 @@ import { useState } from "react";
 import * as z from "zod";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
+import useSendMessage from "@/hooks/useSendMessage";
 
 export default function Messages({ role }) {
+  const { loading, sendMessage } = useSendMessage();
   const { theme } = useThemeContext();
   const { selectedConversation, setSelectedConversation } = useConversation();
   const [message, setMessage] = useState("");
 
   const messageSchema = z.string().trim().min(1, "Message cannot be empty");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       messageSchema.parse(message);
       console.log("Message validated:", message);
+      await sendMessage(message);
+      setMessage("");
     } catch (error) {
       toast("🟥 Message cannot be empty");
       console.error("Message validation error:", error.issues[0].message);
@@ -51,9 +55,15 @@ export default function Messages({ role }) {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-              <Button variant="secondary" size="icon">
-                <img src={Send} alt="Send" />
-              </Button>
+              {loading ? (
+                <Button disable variant="secondary" size="icon">
+                  <img src={Send} alt="Send" />
+                </Button>
+              ) : (
+                <Button variant="secondary" size="icon">
+                  <img src={Send} alt="Send" />
+                </Button>
+              )}
             </form>
           </div>
         </>

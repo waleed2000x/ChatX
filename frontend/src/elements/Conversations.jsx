@@ -13,12 +13,10 @@ export default function Conversations({ name, avatar, conversation }) {
   return (
     <>
       <div
-        className={
-          isSelected ? "conversations selected-convo" : "conversations"
-        }
+        className="conversations"
         onClick={() => setSelectedConversation(conversation)}
       >
-        <div className="convo">
+        <div className={isSelected ? "convo selected-convo" : "convo"}>
           <Avatar className="avatar">
             <AvatarImage src={avatar} />
             <div className="online" />
