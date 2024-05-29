@@ -11,7 +11,6 @@ export default function useLogin() {
     axios
       .post("http://localhost:3000/api/auth/login", { username, password })
       .then((response) => {
-        console.log(response.data.message);
         localStorage.setItem("chat-user", JSON.stringify(response.data));
         setAuthUser(response.data);
         toast("🟩 " + response.data.message);

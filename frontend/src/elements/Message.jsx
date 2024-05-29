@@ -4,16 +4,11 @@ import { useEffect, useRef, useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function Message({ theme }) {
-  const [showTimestamps, setShowTimestamps] = useState({}); // State to track visibility for each message
+  const [showTimestamps, setShowTimestamps] = useState({});
   const { selectedConversation } = useConversation();
   const { messages, loading } = useGetMessages();
   const messagesEndRef = useRef(null);
-  console.log("messages");
-  console.log(messages);
-  console.log(selectedConversation);
-  console.log("messages");
 
-  // Function to toggle timestamp visibility for a specific message
   const toggleTimestamp = (messageId) => {
     setShowTimestamps((prevTimestamps) => ({
       ...prevTimestamps,

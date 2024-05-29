@@ -9,12 +9,14 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import useSendMessage from "@/hooks/useSendMessage";
 import Message from "./Message";
+import useListenMessages from "@/hooks/useListenMessages";
 
-export default function Messages({ role }) {
+export default function Messages() {
   const { loading, sendMessage } = useSendMessage();
   const { theme } = useThemeContext();
-  const { selectedConversation, setSelectedConversation } = useConversation();
+  const { selectedConversation } = useConversation();
   const [message, setMessage] = useState("");
+  useListenMessages();
 
   const messageSchema = z.string().trim().min(1, "Message cannot be empty");
   const handleSubmit = async (e) => {
@@ -39,7 +41,7 @@ export default function Messages({ role }) {
           <div className="messages-header">
             <h3>{selectedConversation.fullname}</h3>
           </div>
-          <Message theme={theme} role={role} />
+          <Message theme={theme} />
           <div className="messages-input">
             <form onSubmit={handleSubmit}>
               <Input

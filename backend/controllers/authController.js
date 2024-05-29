@@ -68,13 +68,12 @@ export const signup = async (req, res, next) => {
     return res.status(500).json({ error });
   }
 };
-
 export const logout = (req, res, next) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
-    // res.clearCookie("token");
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
-    res.status(500).json({ Message: "Error logging you out", error });
+    console.error("Error logging out:", error); // Log the error
+    return res.status(500).json({ message: "Error logging you out", error });
   }
 };

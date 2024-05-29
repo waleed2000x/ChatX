@@ -1,13 +1,14 @@
 import { useAuthContext } from "@/context/authContext";
 import useConversation from "@/zustand/useConversation";
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const useLogout = () => {
   const { setSelectedConversation } = useConversation();
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+  const navigate = useNavigate();
 
   const logout = async () => {
     setLoading(true);
@@ -20,14 +21,14 @@ const useLogout = () => {
       if (data.error) {
         throw new Error(data.error);
       }
-      redirect("/");
       localStorage.removeItem("chat-user");
       setSelectedConversation(null);
       setAuthUser(null);
       toast("🟩 Logged Out Successfully!");
+      navigate("/"); // Navigate to home page after successful logout
     } catch (error) {
-      toast(error.message);
-      console.log(error);
+      toast(`🟥 Error: ${error.message}`);
+      console.log("Logout error:", error);
     } finally {
       setLoading(false);
     }

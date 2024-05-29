@@ -9,8 +9,8 @@ import router from "./routes/authRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import ConnectMongo from "./db/connection.js";
 import UserRouter from "./routes/userRoutes.js";
+import { app, server } from "./sockets/sockets.js";
 
-const app = express();
 dotenv.config({ path: "config.env" });
 app.use(cookieParser());
 app.use(cors());
@@ -35,7 +35,7 @@ app.get("*", (req, res) => {
 
 const Port = process.env.PORT || 3000;
 
-app.listen(Port, () => {
+server.listen(Port, () => {
   ConnectMongo();
   console.log(`Running server at http://localhost:${Port}`);
 });

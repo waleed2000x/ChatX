@@ -1,5 +1,6 @@
 import ConversationModel from "../models/conversation.model.js";
 import MessageModel from "../models/message.model.js";
+import { getReceiverSocketId } from "../sockets/sockets.js";
 
 export async function getMessages(req, res, next) {
   try {
@@ -35,7 +36,6 @@ export async function sendMessage(req, res, next) {
         participants: [senderId, receiverId],
       });
     }
-
     const newMessage = new MessageModel({
       senderId,
       receiverId,
@@ -44,9 +44,17 @@ export async function sendMessage(req, res, next) {
     if (!conversation.messages) {
       conversation.messages = []; // Initialize messages array if it doesn't exist
     }
-    conversation.messages.push(newMessage._id);
-
+    if (newMessage) {
+      conversation.messages.push(newMessage._id);
+    }
     await Promise.all([conversation.save(), newMessage.save()]);
+    //? SOCLET.IO IMPLEMENTATION
+    console.log(`Message sent: ${newMessage.message}`);
+
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
     res.status(200).json({ newMessage });
   } catch (error) {
     console.log(error);

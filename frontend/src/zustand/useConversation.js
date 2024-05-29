@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
 const useConversation = create((set) => {
-  // Get selectedConversation from localStorage, if available
   const storedSelectedConversation = localStorage.getItem(
     "selectedConversation"
   );
@@ -11,7 +10,6 @@ const useConversation = create((set) => {
       ? JSON.parse(storedSelectedConversation)
       : null,
     setSelectedConversation: (selectedConversation) => {
-      // Save selectedConversation to localStorage
       localStorage.setItem(
         "selectedConversation",
         JSON.stringify(selectedConversation)
